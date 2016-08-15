@@ -4,7 +4,7 @@ const check = (a, b, c, d) => {
   } else if ((a > b && c > d) || (a < b && c < d) || (a === b && c === d)) {
     return 1;
   } else {
-    return a();
+    return 0;
   }
 };
 
