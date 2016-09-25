@@ -8,7 +8,7 @@ const bigLettersCount = str => {
     if (toUpperCase(str[i]) === str[i] || str[i] === ' ') {
       count++;
     }
-//    console.log(i, count);
+    //    console.log(i, count);
   }
   return count;
   // END
@@ -17,7 +17,7 @@ const bigLettersCount = str => {
 const compare = (first, second) => {
   const firstCount = bigLettersCount(first);
   const secondCount = bigLettersCount(second);
-//  console.log(firstCount, secondCount);
+  //  console.log(firstCount, secondCount);
   // BEGIN (write your solution here)
   if (firstCount > secondCount) {
     return 1;
@@ -37,4 +37,5 @@ const lessThan = (first, second) => {
 };
 // END
 
+console.log(greaterThan('ASDF', 'QWER'));
 console.log(lessThan('ASDF', 'QWER'));
