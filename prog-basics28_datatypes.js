@@ -1,20 +1,20 @@
 const length = str => str.length;
 
 // BEGIN (write your solution here)
-const sumDigits = num => {
+const sumDigits = (num) => {
   let result = 0;
-  let string = String(num);
-  for (var i = 0; i < length(string); i++) {
-    let oneDig = Number(string[i]);
+  const string = String(num);
+  for (let i = 0; i < length(string); i++) {
+    const oneDig = Number(string[i]);
     result += oneDig;
   }
   return result;
 };
 
-const addDigits = num => {
-  let count = length(String(num));
+const addDigits = (num) => {
+  const count = length(String(num));
   let result = num;
-  for (var i = count; i > 1; i = length(String(result))) {
+  for (let i = count; i > 1; i = length(String(result))) {
     result = sumDigits(result);
   }
   return result;

@@ -1,7 +1,7 @@
 const length = str => str.length;
 const toUpperCase = str => str.toUpperCase();
 
-const bigLettersCount = str => {
+const bigLettersCount = (str) => {
   // BEGIN (write your solution here)
   let count = 0;
   for (let i = 0; i < length(str); i++) {
@@ -28,13 +28,11 @@ const compare = (first, second) => {
   // END
 };
 
-const greaterThan = (first, second) => {
-  return compare(first, second) === 1;
-};
+const greaterThan = (first, second) => compare(first, second) === 1;
 
-const lessThan = (first, second) => {
-  return compare(first, second) === -1;
-};
+
+const lessThan = (first, second) => compare(first, second) === -1;
+
 // END
 
 console.log(greaterThan('ASDF', 'QWER'));

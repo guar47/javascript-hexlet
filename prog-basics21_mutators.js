@@ -1,4 +1,4 @@
-const isPrime = num => {
+const isPrime = (num) => {
   if (num <= 1) {
     return false;
   }

@@ -1,5 +1,5 @@
-const smallestDivisor = num => {
-  const iter = acc => {
+const smallestDivisor = (num) => {
+  const iter = (acc) => {
     if (num % acc === 0) {
       return acc;
     }
