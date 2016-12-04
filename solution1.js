@@ -1,5 +1,6 @@
-export const pi = 3.14;
+var res = '';
+res += 'Q'
+res += 'W'
+res += 'E'
 
-export const square = (num) => {
-  return num * num;
-};
+console.log(','.toLowerCase());

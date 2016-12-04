@@ -1,28 +1,8 @@
-const length = str => str.length;
-
-// BEGIN (write your solution here)
-const sumDigits = num => {
-  let result = 0;
-  let string = String(num);
-  for (var i = 0; i < length(string); i++) {
-    let oneDig = Number(string[i]);
-    result += oneDig;
-  }
-  return result;
+const distance = (x, y) => {
+  var d1 = Math.pow(x * 2 - x * 1, 2);
+  var d2 = Math.pow(y * 2 - y * 1, 2);
+  var d = Math.sqrt(d1 + d2);
+  return d;
 };
 
-const addDigits = num => {
-  let count = length(String(num));
-  let result = num;
-  for (var i = count; i > 1; i = length(String(result))) {
-    result = sumDigits(result);
-  }
-  return result;
-};
-
-// END
-
-console.log(addDigits(1));
-console.log(sumDigits(18));
-console.log(sumDigits('18'));
-console.log(sumDigits('123123'));
+console.log(distance(-2, -3));
