@@ -10,23 +10,13 @@ export const quadrant = (point) => {
     return 3;
   } else if (getX(point) > 0 && getY(point) < 0) {
     return 4;
-  } else {
-    return undefined;
   }
 };
 // END
 
 // BEGIN (write your solution here)
 export const symmetricalPoint = (point) => {
-  if (getX(point) > 0 && getY(point) > 0) {
     point = makePoint(-getX(point), -getY(point));
-  } else if (getX(point) < 0 && getY(point) > 0) {
-    point = makePoint(Math.abs(getX(point)), -getY(point));
-  } else if (getX(point) < 0 && getY(point) < 0) {
-    point = makePoint(Math.abs(getX(point)), Math.abs(getY(point)));
-  } else if (getX(point) > 0 && getY(point) < 0) {
-    point = makePoint(-getX(point), Math.abs(getY(point)));
-  }
   return point;
 };
 // END
