@@ -1,5 +1,9 @@
-const cons = (x, y) => (m) => m(x, y);
-
+//const cons = (x, y) => (m) => m(x, y);
+const cons = function(x, y) {
+    return function(m) {
+        return m(x, y);
+    }
+};
 
 const car = (pair) => {
   return pair((x, y) => {
@@ -11,6 +15,8 @@ const cdr = (pair) => {
     return y;
   });
 };
+
+console.log(car(cons('a', 'b')));
 
 //---------------------------------------------------
 
@@ -44,4 +50,4 @@ const rat1 = make(2, 3);
 const rat12 = make(4, 6);
 const rat2 = make(7, 2);
 
- console.log(add(rat1, rat2));
+ console.log(sub(rat1, rat2));
