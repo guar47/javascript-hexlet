@@ -1,5 +1,3 @@
-var total = [0, 1, 2, 3].reduce(function(a, b) {
-   return a + b;
-});
+import test from './solution1'
 
-console.log(total);
+console.log(test(3))
