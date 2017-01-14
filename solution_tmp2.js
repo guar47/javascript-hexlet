@@ -1,20 +1,8 @@
-// BEGIN (write your solution here)
-const wordsCount = (words, stopWords) => {
-  const lowered = words.map(word => word.toLowerCase());
-  const filtered = lowered.filter(word => !stopWords.includes(word));
-  const result = filtered.reduce((acc, word) => {
-    if (acc.has(word)) {
-      acc.set(word, acc.get(word) + 1);
-    }
-    if (!acc.has(word)) {
-      acc.set(word, 1);
-    }
-    return acc;
-  }, new Map());
-  return result;
-};
-// END
+function removeSmallest(numbers) {
+  const minOfNumbers = Math.min(...numbers);
+  return numbers.indexOf(minOfNumbers);
+  // return numbers.filter(num => !num === minOfNumbers);
+}
 
-const stopWords = ['and', 'or', 'a', 'the', ''];
-const words = ['HellO', 'h', 'And', 'heLlo', '', 'AND', 'DOG', 'oR', 'cat', 'HELLO', 'caT'];
-wordsCount(words, stopWords);
+
+console.log(removeSmallest([1, 2, 3, 4, 5, 1]));
