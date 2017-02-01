@@ -41,8 +41,7 @@ const argDo = {
   attributes: arg => arg,
 };
 
-const getAttrName = (arg) =>
-  Object.keys(argTypes).filter(key => argTypes[key](arg))[0];
+const getAttrName = arg => Object.keys(argTypes).filter(key => argTypes[key](arg))[0];
 
 const buildNode = (name, attributes, body, children) => {
   const singleTagsList = new Set(['hr', 'img', 'br']);
@@ -55,9 +54,9 @@ const buildNode = (name, attributes, body, children) => {
 const parse = (data) => {
   const args = data.slice(1)
     .reduce((acc, arg) => ({ ...acc,
-      [getAttrName(arg)]: argDo[getAttrName(arg)](arg)
+      [getAttrName(arg)]: argDo[getAttrName(arg)](arg),
     }), { name: data[0], attributes: {}, body: '', children: [] });
-  return buildNode(args['name'], args['attributes'], args['body'], args['children']);
+  return buildNode(args.name, args.attributes, args.body, args.children);
 };
 
 const data = ['html', [
