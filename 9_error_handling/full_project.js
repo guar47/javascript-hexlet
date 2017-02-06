@@ -25,7 +25,6 @@ class Tree {
     return this.children.get(key);
   }
 
-  // BEGIN (write your solution here)
   hasChild(key) {
     return this.children.has(key);
   }
@@ -63,14 +62,43 @@ class HexletFs {
     const parts = getPathParts(path);
     const name = parts[parts.length - 1];
     const parent = this.tree.getDeepChild(parts.slice(0, -1));
+    if (!parent || !parent.getMeta().getStats().isDirectory()) {
+      return false;
+    }
     return parent.addChild(name, new File(name));
   }
-
-  mkdirSync(path) {
+  mkdirpSync(path) {
+    return getPathParts(path).reduce((subtree, part) => {
+      if (!subtree) {
+        return false;
+      }
+      const current = subtree.getChild(part);
+      if (!current) {
+        return subtree.addChild(part, new Dir(part));
+      }
+      if (!current.getMeta().getStats().isDirectory()) {
+        return false;
+      }
+      return current;
+    }, this.tree);
+  }
+  rmdirSync(path) {
     const parts = getPathParts(path);
     const name = parts[parts.length - 1];
     const parent = this.tree.getDeepChild(parts.slice(0, -1));
-    return parent.addChild(name, new Dir(name));
+    const current = this.tree.getDeepChild(parts);
+    if (!current || !current.getMeta().getStats().isDirectory() || current.hasChildren()) {
+      return false;
+    }
+    parent.removeChild(name);
+  }
+  readdirSync(path) {
+    const parts = getPathParts(path);
+    const current = this.tree.getDeepChild(parts);
+    if (!current || !current.getMeta().getStats().isDirectory()) {
+      return false;
+    }
+    return current.getChildren().map(node => node.getKey());
   }
 }
 // -------------------------------------------------------------
@@ -135,8 +163,3 @@ class File extends Node {
     return true;
   }
 }
-
-let files = new HexletFs();
-files.mkdirSync('/etc');
-//files.statSync('/etc')
-console.log(files.statSync('/etc'));
