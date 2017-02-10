@@ -4,7 +4,7 @@ const waterfall = (functions, callback) => {
   }
   const next = ([head, ...rest], previousResult) => {
     const cb = (err, ...args) => {
-      if (rest.length === 0) {
+      if (!!err || rest.length === 0) {
         callback(err, args);
       } else {
         next(rest, args);

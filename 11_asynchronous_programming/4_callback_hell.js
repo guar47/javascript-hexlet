@@ -1,15 +1,16 @@
-const retry = (attempts, func, callback) => {
-  const next = (times) => {
-    const cb = (err, result) => {
-      if (!err || times === 0) {
-        callback(err, result);
-        return;
-      } next(times - 1);
+const retry = (times, fn, callback) => {
+  const next = (attempts) => {
+    const cb = (err, args) => {
+      if (!err || attempts === 0) {
+        callback(err, args);
+      } else {
+        next(attempts - 1);
+      }
     };
-    func(cb);
+    fn(cb);
   };
-  const times = attempts === 0 ? 4 : attempts - 1;
-  next(times);
+  const attempts = times === 0 ? 4 : times - 1;
+  next(attempts);
 };
 
 let calledTimes = 0;
