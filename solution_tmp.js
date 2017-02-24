@@ -1,9 +1,9 @@
-function* generateSequence() {
-  yield 1;
-  yield 2;
-  return 3;
-}
-const generator = generateSequence();
-const one = generator.next();
+const test = [1, 2, 3]
 
-console.log(one);
+const after = test.map(num => {
+  if (num + 1 > 0) {
+    return `test ${num}`;
+  }
+})
+
+console.log(after);
