@@ -1,0 +1,15 @@
+{
+  "name": "16_js-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^2.6.1",
+    "express": "*",
+    "morgan": "^1.8.1",
+    "named-routes": "*",
+    "pug": "^2.0.0-beta11"
+  }
+}
