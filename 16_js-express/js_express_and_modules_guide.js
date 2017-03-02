@@ -3,6 +3,7 @@ import Router from 'named-routes';            // module for naming HTTP routes
 import morgan from 'morgan';                  // module for logging web server
 import debug from 'debug';                    // module for debug logging
 import pug from 'pug';                        // template processor
+import methodOverride from 'method-override'; // override http methods in express
 
 const app = new Express();                    // create instance of application Express
 const router = new Router();                  // create instance of router
@@ -20,6 +21,8 @@ rpcLog('action');                             // start rcp debugger
 // DEBUG=http:* bin/server.js - for only http namespace
 // DEBUG=*,-not-this bin/server.js - for all, except -not-this namespace
 app.set('view engine', 'pug');                // add pug template processor to express
+app.use('/assets', Express.static(path));     // force express use this routr for static content (css, fonts, images)
+app.use(methodOverride('_method'));           // force express use mthodOverride
 
 app.get('/', (req, res) => {                  // create route on get (http verb + path + callback)
   res.json({ some: 'json' });                 // send json answer

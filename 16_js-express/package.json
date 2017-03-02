@@ -8,6 +8,7 @@
   "dependencies": {
     "debug": "^2.6.1",
     "express": "*",
+    "method-override": "^2.3.7",
     "morgan": "^1.8.1",
     "named-routes": "*",
     "pug": "^2.0.0-beta11"
