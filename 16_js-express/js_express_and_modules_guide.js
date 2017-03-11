@@ -4,6 +4,7 @@ import morgan from 'morgan';                  // module for logging web server
 import debug from 'debug';                    // module for debug logging
 import pug from 'pug';                        // template processor
 import methodOverride from 'method-override'; // override http methods in express
+import session from 'express-session';        // module for session work
 
 const app = new Express();                    // create instance of application Express
 const router = new Router();                  // create instance of router
@@ -32,6 +33,22 @@ app.post('/increment', (req, res) => {        // create route on post
   res.status(204).send();                     // set http status
   const qs = req.query;                       // object with query string
   res.send('<p>some html</p>');               // send string answer
+});
+
+app.post('/increment', (req, res) => {
+  req.session.counter ||= 0;                  // example of user session manipulation
+  req.session.counter++;
+});
+req.session.destroy(err => {                  // destroy user session
+  // cannot access session here
+})
+app.post('/session', (req, res) => {          // example of user authentication
+  // ...
+  if (user.passwordDigest === encrypt(password)) {
+    req.session.userId = user.id;
+    // ...
+  }
+  // ...
 });
 
 // use template processor (path to template, options) in res.render
@@ -91,6 +108,11 @@ app.get('/users/:userId/books/:id', (req, res) => {
 app.listen(3000, () => {                        // example of start application
   console.log('Example app listening on port 3000!');
 });
+
+app.use(session({                               // settle user session
+  resave: false,
+  saveUninitialized: false,
+}));
 
 // HTTP verbs
 //
