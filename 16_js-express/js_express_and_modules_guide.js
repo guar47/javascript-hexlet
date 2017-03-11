@@ -5,6 +5,7 @@ import debug from 'debug';                    // module for debug logging
 import pug from 'pug';                        // template processor
 import methodOverride from 'method-override'; // override http methods in express
 import session from 'express-session';        // module for session work
+import flash from 'flash';                    // module for flash messages
 
 const app = new Express();                    // create instance of application Express
 const router = new Router();                  // create instance of router
@@ -24,6 +25,7 @@ rpcLog('action');                             // start rcp debugger
 app.set('view engine', 'pug');                // add pug template processor to express
 app.use('/assets', Express.static(path));     // force express use this routr for static content (css, fonts, images)
 app.use(methodOverride('_method'));           // force express use mthodOverride
+app.use(flash());                             // force express use flash
 
 app.get('/', (req, res) => {                  // create route on get (http verb + path + callback)
   res.json({ some: 'json' });                 // send json answer
@@ -113,6 +115,19 @@ app.use(session({                               // settle user session
   resave: false,
   saveUninitialized: false,
 }));
+
+const requiredAuth = (req, res, next) => {      // middleware for authorisation user
+  if (res.locals.currentUser.isGuest()) {
+    return next(new AccessDeniedError());
+  }
+  next();
+};
+
+app.delete('/posts/:id', requiredAuth, (req, res) => {
+  state.posts = state.posts.filter(post =>
+    !(post.id.toString() === req.params.id));
+  res.redirect('/posts');
+});
 
 // HTTP verbs
 //
